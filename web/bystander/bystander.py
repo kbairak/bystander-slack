@@ -170,7 +170,7 @@ class Bystander(object):
 
     def send_not_enough_recipients(self):
         post_ephemeral(self.channel_id, self.requester_id,
-                       random.choice(NOT_ENOUGH_RECIPIENTS_MSG)
+                       random.choice(NOT_ENOUGH_RECIPIENTS_MSG),
                        [{'text': self.text}])
 
     def abort(self):
