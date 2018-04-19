@@ -10,7 +10,7 @@ After you create your app [here](https://api.slack.com/apps?new_app=1) you must 
 3. Under "OAuth & Permissions" add the following required permission scopes, then press "Install App to Workspace"
     * Add commands to Transifex (`commands`)
     * Access information about user’s public channels (`channels:read`)
-    * Send messages as bystander-kouk-test (`chat:write:bot`)
+    * Send messages as "bystander" (`chat:write:bot`)
     * Access basic information about the workspace’s User Groups (`usergroups:read`)
     * Access your workspace’s profile information (`users:read`)
 
