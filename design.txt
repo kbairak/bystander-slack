@@ -1,0 +1,33 @@
+- user A writes `/bystander @team_pollux please review http://...`
+- flask gets an http request:
+    - starts off a celery task
+    - responds with an ephemeral message to user A
+celery:
+    - checks every user ID against usergroups
+    - stores the bystander request
+    - randomly picks user B and sends him 2 buttons, 'accept' 'reject'
+
+- user B clicks 'accept'
+- flask gets an http request:
+    - deletes the bystander request from storage
+    - sends an ephemeral message to user A, informing him that user B accepted
+      his bystander request
+    - sends an ephemeral message to user B, thanking him
+
+- user B clicks 'reject'
+- flask gets an http request:
+    - updates the bystander request in storage
+    - sets off a celery task providing the id of the stored bystander request
+    - sends an ephemeral message to user B, letting him know that it acks
+
+- all users eventually reject the bystander request:
+    - deletes the bystander request from storage
+    - sends an ephemeral message to user A, informing him that nobody accepted
+      his bystander request
+    - sends an ephemeral message to user Z, letting him know that it acks
+
+
+Notes:
+
+sample command message containing a user group:
+'<!subteam^S0EEX9YUT|@team_pollux> can someone figure out what the problem is here? <https://circleci.com/gh/transifex/django-txdata/1587>'
